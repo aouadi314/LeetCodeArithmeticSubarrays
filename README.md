@@ -47,3 +47,45 @@ Constraints:
     0 <= l[i] < r[i] < n
     -105 <= nums[i] <= 105
 
+This is the solution:
+
+If s[i+1] - s[i] == s[1] - s[0], this means that s[i+1] < s[i] < s[i-1] or s[i+1] > s[i] > s[i-1]. So, from my point of view, our subarray should be always sorted. To sort our subarray, we should create a copy of our subarray.
+
+Then, we can compute the first distance s[1] - s[0] and verify for each distance s[i+1] - s[i] if it is equal to the first one. If it isnot, we can exit the loop and return false in the vector. Else if each distance are equal to the first one, we keep our value to true.
+
+
+```cpp
+class Solution {
+public:
+    vector<bool> checkArithmeticSubarrays(vector<int>& nums, vector<int>& l, vector<int>& r) {
+    	vector<bool> results;
+    	if(l.size() != r.size())
+    	    return results;
+    	size_t nbArray = r.size();
+	for(int idxSubArray = 0; idxSubArray < nbArray; ++idxSubArray)
+	{
+	    int sizeArray = r[idxSubArray] - l[idxSubArray];
+	    if(sizeArray < 1)
+	    {
+	        results.push_back(false);
+		continue;
+	    }
+	    vector<int> subArray(nums.begin()+l[idxSubArray],nums.begin()+r[idxSubArray]);
+	    std::sort(subArray.begin(),subArray.end());
+	    int distance = subArray[1] - subArray[0];
+	    bool isArithmetic = true;
+	    for(int idx = 1; idx < sizeArray - 1; ++idx)
+	    {
+		if(subArray[idx + 1] - subArray[idx] != distance)
+		{
+		    isArithmetic = false;
+		    break;
+		}
+	    }
+	    results.push_back(isArithmetic);
+	}
+	return results;
+    }
+};
+```
+

@@ -93,9 +93,14 @@ public:
 ### Runtime and complexity:
 
 For the constructor of vector, cplusplus/reference website advises a linear complexity which means N where N is the length of subArray.
+
 For the std::sort function, cplusplus/reference website advises a complexity of Nxlog(N) where, here, N is the length of subArray.
+
 For the loop For with an index idx which test the distance of each element in the subarray, we expect a complexity of N where N is the length of subArray.
+
 For the push_back, cplusplus/reference website advises a constant complexity.
+
 Last but not least, the loop For with an index idxSubArray to test for each subArray, we expect a complexity of N where N is the length of r and/or l.
+
 In conclusion, for the first part, we keep the biggest complexity of Nxlog(N) and for the big For loop, we have a complexity of M. So, in the end, we have a complexity of MxNxlog(N) where M is the length of r and N is the length of the biggest subarray.
 
